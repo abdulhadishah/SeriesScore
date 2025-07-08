@@ -52,7 +52,6 @@
             background-color: #f9f9f9;
             color: #37352F;
             margin: 5px 0;
-            /* Add margin for spacing */
         }
 
         .submit-button {
@@ -142,7 +141,7 @@
         </div>
 
         <div class="form-group">
-            <label for "characters"><span class="icon">👥</span> Characters:</label>
+            <label for="characters"><span class="icon">👥</span> Characters:</label>
             <input type="number" id="characters" min="1" max="10" placeholder="Rate (1-10)" required pattern="[1-9]|10">
         </div>
 
@@ -161,12 +160,6 @@
             <input type="number" id="sound" min="1" max="10" placeholder="Rate (1-10)" required pattern="[1-9]|10">
         </div>
 
-        <div class="form-group">
-            <label for="rewatchability"><span class="icon">🔁</span> Re-Watchability:</label>
-            <input type="number" id="rewatchability" min="1" max="10" placeholder="Rate (1-10)" required
-                pattern="[1-9]|10">
-        </div>
-
         <button class="submit-button" onclick="calculateRating()">Calculate Final Rating 🚀</button>
     </div>
 
@@ -177,8 +170,7 @@
     <div class="popup-background" id="popupBackground">
         <div class="overlay"></div>
         <div class="popup">
-            <div class="popup-text" id="popupText">
-            </div>
+            <div class="popup-text" id="popupText"></div>
         </div>
     </div>
 
@@ -189,9 +181,11 @@
             const animation = parseInt(document.getElementById('animation').value);
             const artstyle = parseInt(document.getElementById('artstyle').value);
             const sound = parseInt(document.getElementById('sound').value);
-            const rewatchability = parseInt(document.getElementById('rewatchability').value);
 
-            if (isNaN(storyline) || isNaN(characters) || isNaN(animation) || isNaN(artstyle) || isNaN(sound) || isNaN(rewatchability)) {
+            if (
+                isNaN(storyline) || isNaN(characters) ||
+                isNaN(animation) || isNaN(artstyle) || isNaN(sound)
+            ) {
                 showAlert("Please fill in all rating fields.");
                 return;
             }
@@ -201,20 +195,19 @@
                 characters < 1 || characters > 10 ||
                 animation < 1 || animation > 10 ||
                 artstyle < 1 || artstyle > 10 ||
-                sound < 1 || sound > 10 ||
-                rewatchability < 1 || rewatchability > 10
+                sound < 1 || sound > 10
             ) {
                 showAlert("Ratings must be between 1 and 10.");
                 return;
             }
 
-            const totalRating = storyline + characters + animation + artstyle + sound + rewatchability;
-            const finalRating = (totalRating / 6).toFixed(1);
+            const totalRating = storyline + characters + animation + artstyle + sound;
+            const finalRating = (totalRating / 5).toFixed(1);
 
-            document.getElementById('result').style
-            display = 'block';
+            document.getElementById('result').style.display = 'block';
             document.getElementById('final-rating').textContent = finalRating;
-            document.getElementById('popupText').innerHTML = `<span style="color: #594A3A;">Final Score is: </span>${finalRating}<span class="icon">⭐</span>`;
+            document.getElementById('popupText').innerHTML =
+                `<span style="color: #594A3A;">Final Score is: </span>${finalRating}<span class="icon">⭐</span>`;
             document.getElementById('popupBackground').style.display = "flex";
         }
 
@@ -225,6 +218,7 @@
         function closePopup() {
             document.getElementById('popupBackground').style.display = "none";
         }
+
         document.getElementById('popupBackground').addEventListener('click', function (e) {
             if (e.target.id === 'popupBackground') {
                 closePopup();
