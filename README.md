@@ -13,9 +13,9 @@ https://abdulhadishah.github.io/SeriesScore/
 - CSS  
 - Vanilla JavaScript
 
-### Notes
+### What this project was for
+An early project built as a lightweight scoring helper rather than a full review platform.
 
-This is an early project that I’ve slowly improved over time.  
-It’s not meant to be a full review platform, just a lightweight scoring helper.
+Nothing advanced here, just early work that I kept to track improvement over time.
 
 ---
